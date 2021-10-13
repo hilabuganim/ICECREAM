@@ -1,0 +1,59 @@
+﻿@model icecream.Models.AddressesModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+<h4>Addresses</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="address.city" class="control-label"></label>
+                <select name="cities" id="cities">
+                    @foreach (string city in Model.cities)
+                    {
+                        <option value=@city>@city</option>
+                    }                    
+                </select>
+                <span asp-validation-for="address.city" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="address.street" class="control-label"></label>
+                <<select name="cities" id="cities">
+                    @foreach (string street in Model.streets)
+                    {
+                        <option value=@street>@street</option>
+                    }
+                </select>
+                <span asp-validation-for="address.street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="address.houseNumber" class="control-label"></label>
+                <input asp-for="address.houseNumber" class="form-control" />
+                <span asp-validation-for="address.houseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<icecream.Models.Addresses>
+
+@{
+    Layout = null;
+}
+@{ 
+    var data = (HashSet<string>)ViewData["Message"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    
+    <title>EnterAddress</title>
+</head>
+<body>
+ 
+    <input id="selector1" type="text" list="citys" onchange="change()" />
+    <datalist id="citys">
+        @foreach (var item in data)
+        {
+            <option value="@item" label="@item"></option>
+}
+    </datalist>
+    <input id="selector" type="text" list="streets" hidden="hidden" />
+    <datalist id="streets">
+        @foreach (var item in Model)
+        {
+            <option value="@item.city" label="@item.street"></option>
+}
+    </datalist>
+    <input id="selector2" type="text" list="streets2" name="street" />
+    <datalist id="streets2">
+    </datalist>
+    <input type="submit" value="חפש" />
+    <script>
+        function change() {
+            var street = document.getElementById("streets2");
+            street.innerHTML = '';
+            var city = document.getElementById('selector1').value;
+           
+            var temp = document.getElementById("streets");
+            var op = temp.getElementsByTagName("option");
+            for (var i = 0; i < op.length; i++) {
+                if (op[i].value.trim() == city.trim()) {
+                    var node = document.createElement("option");
+                    var txt = document.createTextNode(op[i].label);
+                    node.appendChild(txt);
+                    document.getElementById('streets2').appendChild(node)
+                }
+            }
+        }
+    </script>
+
+</body>
+</html >

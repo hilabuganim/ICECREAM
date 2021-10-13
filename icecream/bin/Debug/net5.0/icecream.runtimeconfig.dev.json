@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\hilab\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\hilab\\.nuget\\packages"
+    ]
+  }
+}
