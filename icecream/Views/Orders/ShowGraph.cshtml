@@ -1,0 +1,72 @@
+﻿@model IEnumerable<icecream.Models.Temperature>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowGraph</title>
+
+
+
+</head>
+<body onload="Show()">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    @{
+        string values = string.Empty;
+    }
+    @foreach (var item in Model)
+    {
+        var val = item.TempValue;
+        values += "{y:" + val + "},";
+
+        
+    }
+    @{
+        var str = values.Remove(values.Length - 1, 1);
+    }
+
+  
+    <script>
+        var data ="@str";
+    </script>
+
+
+    <div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+
+    <script src="~/js/canvasjs.min.js"></script>
+
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Simple Line Chart"
+                },
+                axisY: {
+                    includeZero: false
+                },
+                axisX: {
+                    includeZero: false
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: eval("[" + data + "]")
+                }]
+            });
+            chart.render();
+
+        }
+    </script>
+    <p style="font-size:25px; text-align:center">Jan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fab &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mar &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apr &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jun &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jul &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aug &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sep &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Oct &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nov &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dec</p>
+</body>
+</html>

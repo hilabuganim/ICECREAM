@@ -31,7 +31,9 @@ namespace icecream.Controllers
             //    }
             //}
             //_context.SaveChanges();
-            
+            //CreatesPrediction.Main();
+
+
         }
 
         // GET: Addresses
@@ -164,11 +166,17 @@ namespace icecream.Controllers
         {
             return _context.Addresses.Any(e => e.id == id);
         }
+        public List<string> GetCities()
+        {
+            List<string> result = _context.Addresses.Select(a => a.city).ToList();
+            return result;
+        }
         public List<string> GetStreets(string city)
         {
             List<string> result = _context.Addresses.Where(address => address.city == city).Select(a => a.street).ToList();
             return result;
         }
+
         public IActionResult EnterAddress()
         {
             ViewBag.Message = (from item in _context.Addresses.ToList()

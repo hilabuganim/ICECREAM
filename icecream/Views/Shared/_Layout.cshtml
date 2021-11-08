@@ -3,31 +3,36 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - icecream</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/index-style.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">icecream</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <div data-collapse="medium" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
+            <div class="w-container">
+                <a href="/" aria-current="page" class="brand w-clearfix w-nav-brand" aria-label="home">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d070d8420d48_stone-logo-beige.svg" width="20" alt="" class="stone-logo">
+                    <div class="logo-text">STONE</div>
+                </a>
+                <nav role="navigation" class="nav-menu w-nav-menu">
+                    <a href="/" aria-current="page" class="nav-link w-nav-link" style="">Home</a>
+                    <a href="/work" class="nav-link w-nav-link" style="">Work</a>
+                    <a href="/contact" class="nav-link w-nav-link" style="">Contact</a>
+                    <a href="#" class="nav-link w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav-link" style="">Facebook</a>
+                    <a href="#" class="nav-link w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav-link" style="">Twitter</a>
+                </nav>
+                <a href="http://www.twitter.com/webflowapp" class="nav-link social-icons last w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d0642f420d49_twitter-icon.svg" width="16" alt="">
+                </a>
+                <a href="http://www.facebook.com/webflow" class="nav-link social-icons w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d0781c420d40_facebook-icon2.svg" width="15" alt="">
+                </a>
+                <div class="menu-button w-nav-button" style="-webkit-user-select: text;" aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+                    <div class="menu-icon w-icon-nav-menu"></div>
                 </div>
             </div>
-        </nav>
+            <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+            <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -35,14 +40,19 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - icecream - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <div class="section footer">
+        <div class="w-container">
+            <div class="w-row">
+                <div class="w-col w-col-4">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d067ea420d45_stone-logo.svg" width="20" alt="" class="stone-logo footer">
+                    <div class="footer-text w-hidden-small w-hidden-tiny">2014 Stone Creative Agency</div>
+                </div>
+                <div class="w-col w-col-4"><a href="/contact" class="button beige footer">get in touch with us</a></div>
+                <div class="w-col w-col-4">
+                    <div class="footer-text address">1423 Elk St, Brooklyn NY, 82328</div>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    </div>
 </body>
 </html>

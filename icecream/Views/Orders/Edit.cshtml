@@ -1,0 +1,62 @@
+﻿@model icecream.Models.Order
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="id" />
+            <div class="form-group">
+                <label asp-for="date" class="control-label"></label>
+                <input asp-for="date" class="form-control" />
+                <span asp-validation-for="date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="temp" class="control-label"></label>
+                <input asp-for="temp" class="form-control" />
+                <span asp-validation-for="temp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="clientFullName" class="control-label"></label>
+                <input asp-for="clientFullName" class="form-control" />
+                <span asp-validation-for="clientFullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="phoneNumber" class="control-label"></label>
+                <input asp-for="phoneNumber" class="form-control" />
+                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="humidity" class="control-label"></label>
+                <input asp-for="humidity" class="form-control" />
+                <span asp-validation-for="humidity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="airPollution" class="control-label"></label>
+                <input asp-for="airPollution" class="form-control" />
+                <span asp-validation-for="airPollution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

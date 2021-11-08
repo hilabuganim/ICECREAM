@@ -12,7 +12,10 @@ namespace icecream.Models
         public int id { get; set; }
 
         public DateTime date { get; set; }
-        public int address { get; set; }
+        public string city { get; set; }
+        public string street { get; set; }
+        public int houseNumber { get; set; }
+        public int icecreamId { get; set; }
         public double temp { get; set; }
         public string clientFullName { get; set; }
         public string phoneNumber { get; set; }

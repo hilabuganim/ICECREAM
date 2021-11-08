@@ -56,10 +56,18 @@ namespace icecream.Controllers
         public ActionResult Login(string userName, string password)
         {
             if (SellersExists(userName, password))
+            {
                 // Sends him to his personal page
+                RouteConfig.user = _context.Seller.Where(e => e.userName == userName && e.password == password).Select(e => e).FirstOrDefault();
                 return View("Login");
-            else 
+            }
+            else
                 return View("Login");
+        }
+        public ActionResult Logout()
+        {
+                RouteConfig.user = null;
+                return View("Home");
         }
         private bool SellersExists(string userName)
         {

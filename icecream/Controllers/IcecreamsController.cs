@@ -83,6 +83,7 @@ namespace icecream.Controllers
                 icecream.image = downloadUrl;
                 _context.Add(icecream);
                 await _context.SaveChangesAsync();
+                stream.Close();
                 return RedirectToAction(nameof(Index));
             }
 
@@ -203,7 +204,7 @@ namespace icecream.Controllers
         
         public bool checkImage(string url)
         {
-            List<string> namesOfDrugs = new List<string> { "ice cream"};
+            List<string> namesOfDrugs = new List<string> { "ice cream" ,"ice","fruit"};
 
 
             bool Result = false;

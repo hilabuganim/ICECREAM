@@ -13,4 +13,5 @@ using icecream.Models;
         }
 
         public DbSet<icecream.Models.Addresses> Addresses { get; set; }
+        public DbSet<icecream.Models.Order> Orders { get; set; }
     }

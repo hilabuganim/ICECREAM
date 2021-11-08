@@ -33,6 +33,9 @@ namespace icecream
 
             services.AddDbContext<sellersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sellersContext")));
+
+            services.AddDbContext<OrderContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("OrderContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
