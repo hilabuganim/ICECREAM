@@ -19,9 +19,9 @@ namespace icecream.Controllers
 {
     public class IcecreamsController : Controller
     {
-        private readonly icecreamContext _context;
+        private readonly IceContext _context;
 
-        public IcecreamsController(icecreamContext context)
+        public IcecreamsController(IceContext context)
         {
             _context = context;
         }
@@ -29,7 +29,10 @@ namespace icecream.Controllers
         // GET: Icecreams
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Icecream.ToListAsync());
+            if( RouteConfig.user != null)
+                return View(await _context.Icecream.Where(i => i.sellerId == RouteConfig.user.id).ToListAsync());
+            else
+                return View(await _context.Icecream.ToListAsync());
         }
 
         // GET: Icecreams/Details/5

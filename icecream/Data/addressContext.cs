@@ -7,9 +7,9 @@ using icecream.Models;
 
     public class addressContext : DbContext
     {
-        public addressContext (DbContextOptions<addressContext> options)
+        public addressContext(DbContextOptions<addressContext> options)
             : base(options)
-        {
+    {
         }
 
         public DbSet<icecream.Models.Addresses> Addresses { get; set; }

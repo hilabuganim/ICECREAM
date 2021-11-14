@@ -148,7 +148,148 @@ namespace icecream.Controllers
         {
             return _context.Seller.Any(e => e.id == id);
         }
-
+        public IActionResult predict2()
+        {
+            ViewBag.Message = "";
+            return View("~/Views/Sellers/Predict.cshtml");
+        }
+        public IActionResult predict(string season,string day, double humidity,double temperature,string city)
+        {
+            var icecream=PredictIcecream(day, temperature, city);
+            ViewBag.Message = icecream;
+            return View();
+        }
+        	public static string PredictIcecream(string day, double? temperatura, string city)
+        {
+            if (temperatura == null)
+	{
+	return "Banana strawberry";
+	}
+	if (temperatura > 22)
+            {
+	if (city == null)
+	{
+	return "Banana strawberry";
+	}
+	if (city.Equals("Tel Aviv"))
+                {
+	if (temperatura > 30)
+                    {
+	return "Strawberry sorbet";
+	}
+	if (temperatura <= 30)
+                    {
+	return "Raffaello";
+	}
+	}
+	if (!city.Equals("Tel Aviv"))
+                {
+	if (city.Equals("Ramat Gan"))
+                    {
+	if (day == null)
+	{
+	return "Kinder Bueno";
+	}
+	if (day.Equals("Monday"))
+                        {
+	return "Pistachio";
+	}
+	if (!day.Equals("Monday"))
+                        {
+	return "Kinder Bueno";
+	}
+	}
+	if (!city.Equals("Ramat Gan"))
+                    {
+	if (city.Equals("Bnei Brak"))
+                        {
+	return "Pistachio";
+	}
+	if (!city.Equals("Bnei Brak"))
+                        {
+	if (day == null)
+	{
+	return "Banana strawberry";
+	}
+	if (day.Equals("Saturday"))
+                            {
+	return "Chocolate";
+	}
+	if (!day.Equals("Saturday"))
+                            {
+	return "Banana strawberry";
+	}
+	}
+	}
+	}
+	}
+	if (temperatura <= 22)
+            {
+	if (temperatura > 17)
+                {
+	if (temperatura > 19)
+                    {
+	return "Salted caramel";
+	}
+	if (temperatura <= 19)
+                    {
+	if (city == null)
+	{
+	return "Dark Chocolate";
+	}
+	if (city.Equals("Bnei Brak"))
+                        {
+	return "Dark Chocolate";
+	}
+	if (!city.Equals("Bnei Brak"))
+                        {
+	return "Mango Sorbet";
+	}
+	}
+	}
+	if (temperatura <= 17)
+                {
+	if (temperatura > 14)
+                    {
+	if (city == null)
+	{
+	return "Chocolate";
+	}
+	if (city.Equals("Jerusalem"))
+                        {
+	return "Strawberry sorbet";
+	}
+	if (!city.Equals("Jerusalem"))
+                        {
+	if (city.Equals("Elad"))
+                            {
+	return "Chocolate";
+	}
+	if (!city.Equals("Elad"))
+                            {
+	return "Passionflower sorbet";
+	}
+	}
+	}
+	if (temperatura <= 14)
+                    {
+	if (city == null)
+	{
+	return "Ferrero Rocher";
+	}
+	if (city.Equals("Tel Aviv"))
+                        {
+	return "Lotus cookies";
+	}
+	if (!city.Equals("Tel Aviv"))
+                        {
+	return "Ferrero Rocher";
+	}
+	}
+	}
+	}
+	return null;
+	}
 
     }
 

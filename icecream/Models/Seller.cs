@@ -12,7 +12,9 @@ namespace icecream.Models
         public int id { get; set; }
 
         public string storeName { get; set; }
-        public int address { get; set; }
+        public string city { get; set; }
+        public string street { get; set; }
+        public int houseNumber { get; set; }
         public string phoneNumber { get; set; }
         public string fullName { get; set; }
         public string password { get; set; }

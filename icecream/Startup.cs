@@ -34,7 +34,7 @@ namespace icecream
             services.AddDbContext<sellersContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("sellersContext")));
 
-            services.AddDbContext<OrderContext>(options =>
+            services.AddDbContext<IceContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("OrderContext")));
         }
 

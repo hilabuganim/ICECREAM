@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<icecream.Models.Icecream>
 
 @{
-    Layout = null;
+        Layout = null;
 }
 
 <html data-wf-domain="template-stone.webflow.io" data-wf-page="5e457cdd6bf0d0c1d6420d3d"
@@ -43,12 +43,14 @@
                aria-label="home">
                 <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d070d8420d48_stone-logo-beige.svg"
                      width="20" alt="" class="stone-logo">
-                <div class="logo-text">STONE</div>
+                <div class="logo-text">ICE</div>
             </a>
             <nav role="navigation" class="nav-menu w-nav-menu">
                 <a href="/" aria-current="page" class="nav-link w-nav-link w--current" style="">Home</a>
-                <a href="/work" class="nav-link w-nav-link" style="">Work</a>
-                <a href="/contact" class="nav-link w-nav-link" style="">Contact</a>
+                <a href="/icecream" class="nav-link w-nav-link" style="">Flavors</a>
+                <a href="/account" class="nav-link w-nav-link" style="">Login</a>
+                <a asp-controller="sellers" asp-action="predict2" class="nav-link w-nav-link" style="">Predict</a>
+
                 <a href="#" class="nav-link w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav-link" style="">Facebook</a>
                 <a href="#" class="nav-link w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav-link" style="">Twitter</a>
             </nav>
@@ -87,10 +89,12 @@
                 <title>Index</title>
             </head>
             <body>
-
-                <p>
+                @if (RouteConfig.user != null)
+                {
+                    <p>
                     <a asp-action="Create">Create New</a>
                 </p>
+                }
 
                 <div class="icecreams">
 
@@ -98,21 +102,23 @@
                     <div class="container">
                         @foreach (var item in Model)
                         {
-                            <div class="item">
+                        <div class="item">
+                            <a href="~/Orders?icecreamId=@item.id">
                                 <img src="@item.image" />
+                            </a>
                                 <h1 class="flavor"><strong>@item.icecreamName</strong></h1>
                                 <p>@item.icecreamDescription</p>
                                 <p>@item.price $</p>
                                 @if (RouteConfig.user != null)
                                 {
-                                <div class="crud">
-                                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                                    @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
-                                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                                </div>
+                                    <div class="crud">
+                                        <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                                        @*<a asp-action="Details" asp-route-id="@item.id">Details</a> |*@
+                                        <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                                    </div>
                                 }
 
-                            </div>
+                        </div>
                         }
                     </div>
 

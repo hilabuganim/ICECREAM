@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/index-style.css">
+</head>
+<body>
+    <header>
+        <div data-collapse="medium" data-animation="default" data-duration="400" role="banner" class="navbar w-nav">
+            <div class="w-container">
+                <a href="/" aria-current="page" class="brand w-clearfix w-nav-brand" aria-label="home">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d070d8420d48_stone-logo-beige.svg" width="20" alt="" class="stone-logo">
+                    <div class="logo-text">ICE</div>
+                </a>
+                <nav role="navigation" class="nav-menu w-nav-menu">
+                    <a href="/" aria-current="page" class="nav-link w-nav-link" style="">Home</a>
+                    <a asp-controller="icecreams" action="index" class="nav-link w-nav-link" style="">Flavors</a>
+                    @if (RouteConfig.user == null)
+                    {<a href="/Account" class="nav-link w-nav-link" style="">login</a>}
+                    else
+                    {<a href="/Account/Logout" class="nav-link w-nav-link" style="">logout</a>}
+                    <a asp-controller="sellers" asp-action="predict2" class="nav-link w-nav-link" style="">Predict</a>
+                    <a href="#" class="nav-link w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav-link" style="">Facebook</a>
+                    <a href="#" class="nav-link w-hidden-main w-hidden-medium w-hidden-small w-hidden-tiny w-nav-link" style="">Twitter</a>
+                </nav>
+                <a href="http://www.twitter.com/webflowapp" class="nav-link social-icons last w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d0642f420d49_twitter-icon.svg" width="16" alt="">
+                </a>
+                <a href="http://www.facebook.com/webflow" class="nav-link social-icons w-hidden-medium w-hidden-small w-hidden-tiny w-inline-block">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d0781c420d40_facebook-icon2.svg" width="15" alt="">
+                </a>
+                <div class="menu-button w-nav-button" style="-webkit-user-select: text;" aria-label="menu" role="button" tabindex="0" aria-controls="w-nav-overlay-0" aria-haspopup="menu" aria-expanded="false">
+                    <div class="menu-icon w-icon-nav-menu"></div>
+                </div>
+            </div>
+            <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+            <div class="w-nav-overlay" data-wf-ignore="" id="w-nav-overlay-0"></div>
+        </div>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="section footer">
+        <div class="w-container">
+            <div class="w-row">
+                <div class="w-col w-col-4">
+                    <img src="https://assets.website-files.com/5e457cdd6bf0d06897420d3a/5e457cdd6bf0d067ea420d45_stone-logo.svg" width="20" alt="" class="stone-logo footer">
+                    <div class="footer-text w-hidden-small w-hidden-tiny">2014 Stone Creative Agency</div>
+                </div>
+                <div class="w-col w-col-4"><a href="/contact" class="button beige footer">get in touch with us</a></div>
+                <div class="w-col w-col-4">
+                    <div class="footer-text address">1423 Elk St, Brooklyn NY, 82328</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

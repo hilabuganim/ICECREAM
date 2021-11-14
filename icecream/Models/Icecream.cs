@@ -15,6 +15,7 @@ namespace icecream.Models
         public string icecreamDescription { get; set; }
         public double price { get; set; }
         public string image { get; set; }
+        public int sellerId { get; set; }
         
     }
 }

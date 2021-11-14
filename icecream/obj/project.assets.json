@@ -8995,11 +8995,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hilab\\source\\repos\\icecream\\icecream\\icecream.csproj",
+      "projectUniqueName": "C:\\Users\\hilab\\OneDrive\\שולחן העבודה\\ICECREAM\\icecream\\icecream.csproj",
       "projectName": "icecream",
-      "projectPath": "C:\\Users\\hilab\\source\\repos\\icecream\\icecream\\icecream.csproj",
+      "projectPath": "C:\\Users\\hilab\\OneDrive\\שולחן העבודה\\ICECREAM\\icecream\\icecream.csproj",
       "packagesPath": "C:\\Users\\hilab\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hilab\\source\\repos\\icecream\\icecream\\obj\\",
+      "outputPath": "C:\\Users\\hilab\\OneDrive\\שולחן העבודה\\ICECREAM\\icecream\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hilab\\AppData\\Roaming\\NuGet\\NuGet.Config",

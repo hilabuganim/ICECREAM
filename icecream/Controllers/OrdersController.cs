@@ -6,23 +6,39 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using icecream.Models;
+using System.IO;
 
 namespace icecream.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly OrderContext _context;
-        private readonly addressContext _addresscontext;
+        private readonly IceContext _context;
 
-        public OrdersController(OrderContext context)
+        public OrdersController(IceContext context)
         {
             _context = context;
-            AddressesController controller = new AddressesController();
+            //AddressesController controller = new AddressesController();
         }
         // GET: Orders
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int icecreamId)
         {
-            return View(await _context.Order.ToListAsync());
+            //using (var reader = new StreamReader(@"C:\Users\hilab\Downloads\addresses.csv"))
+            //{
+            //    List<Addresses> allAddresses = new List<Addresses>();
+            //    var line = reader.ReadLine();
+            //    while (!reader.EndOfStream)
+            //    {
+            //        line = reader.ReadLine();
+            //        var values = line.Split(',');
+            //        Addresses address = new Addresses() { city = values[1].ToString(), street = values[3] };
+            //        _context.Addresses.Add(address);
+            //    }
+            //}
+            //_context.SaveChanges();
+            Order order = new Order();
+            order.icecreamId = icecreamId;
+            order.date = DateTime.Now;
+            return View("~/Views/Orders/Create.cshtml",order);
         }
 
         // GET: Orders/Details/5
@@ -33,7 +49,7 @@ namespace icecream.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .FirstOrDefaultAsync(m => m.id == id);
             if (order == null)
             {
@@ -46,9 +62,7 @@ namespace icecream.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            Order order = new Order();
-            order.date = DateTime.Now;
-            return View(order);
+            return View(new Order());
         }
 
         // POST: Orders/Create
@@ -60,6 +74,10 @@ namespace icecream.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!_context.Addresses.Any(a => a.city.ToLower() == order.city.ToLower() && a.street.ToLower() == order.street.ToLower()))
+                    return View(order);
+                // insert the weather of this day - API
+
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -75,7 +93,7 @@ namespace icecream.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Orders.FindAsync(id);
             if (order == null)
             {
                 return NotFound();
@@ -126,7 +144,7 @@ namespace icecream.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Orders
                 .FirstOrDefaultAsync(m => m.id == id);
             if (order == null)
             {
@@ -141,25 +159,27 @@ namespace icecream.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Order.FindAsync(id);
-            _context.Order.Remove(order);
+            var order = await _context.Orders.FindAsync(id);
+            _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool OrderExists(int id)
         {
-            return _context.Order.Any(e => e.id == id);
+            return _context.Orders.Any(e => e.id == id);
         }
         public IActionResult showgraph()
         {
+            if (RouteConfig.user == null)
+                return View("Home");
             int counter = 1;
             List<Temperature> temps = new List<Temperature>();
             for (int i = 1; i <= 12; i++)
             {
                 Temperature t = new Temperature { Id = counter++, Month = i, TempValue = 0 };
 
-                foreach (var item in _context.Order)
+                foreach (var item in _context.Orders.Where(o => _context.Icecream.Select(i => i.id == o.icecreamId && i.sellerId == RouteConfig.user.id).Count() != 0))
                 {
                     if (item.date.Month == i)
                         t.TempValue++;

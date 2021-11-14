@@ -5,8 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\OrdersContext.cs" />
     <Compile Remove="Migrations\Address\20211007071203_Address_Creat.cs" />
     <Compile Remove="Migrations\Address\20211007071203_Address_Creat.Designer.cs" />
+    <Compile Remove="Migrations\Address\20211007075424_Address_Create_remove.cs" />
+    <Compile Remove="Migrations\Address\20211007075424_Address_Create_remove.Designer.cs" />
+    <Compile Remove="Migrations\Order\20211024081931_create_order.cs" />
+    <Compile Remove="Migrations\Order\20211024081931_create_order.Designer.cs" />
+    <Compile Remove="Migrations\Order\20211027080927_order_Create.cs" />
+    <Compile Remove="Migrations\Order\20211027080927_order_Create.Designer.cs" />
+    <Compile Remove="Migrations\Order\20211110140705_Orders_Create.cs" />
+    <Compile Remove="Migrations\Order\20211110140705_Orders_Create.Designer.cs" />
+    <Compile Remove="Migrations\Seller\20211010094341_seller_Create.cs" />
+    <Compile Remove="Migrations\Seller\20211010094341_seller_Create.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\Seller_Layout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -148,6 +163,10 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\Seller\" />
   </ItemGroup>
 
 </Project>
