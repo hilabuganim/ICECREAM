@@ -1,45 +1,59 @@
 ﻿@{
     ViewData["Title"] = "Predict";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
     var data = (string)ViewData["Message"];
 }
+<link rel="stylesheet" href="~/index-style.css">
+<div class="section beige" style="background-color: palevioletred">
+    <div class="w-container">
+        <div class="w-container">
+            <h1 style="color: black">Predict.</h1>
+            <div style="background-color: black" class="horizontal-bar beige"></div>
+        </div>
+    </div>
+</div>
+<div class="section lightgrey">
+    <div class="w-container">
+        <form style="display: flex; gap: 10px; flex-direction: column" action="predict" method="get">
+            <label>Season: </label>
+            <select style="color: black" class="button" name="season">
+                <option>Summer</option>
+                <option>Winter</option>
+                <option>Spring</option>
+                <option>Fall</option>
+            </select><br />
+            <label>Day: </label>
+            <select style="color: black" class="button" name="Day">
+                <option>Sunday</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+            </select><br />
+            <label>Humidity: </label>
+            <input style="color: black" class="button" type="number" name="humidity" /><br />
+            <label>Temperature: </label>
+            <input style="color: black" class="button" type="number" name="temperature" /><br />
+            <label>City: </label>
+            <select style="color: black" class="button" name="city">
+                <option>Elad</option>
+                <option>Bnei Brak</option>
+                <option>Tel Aviv</option>
+                <option>Ramat Gan</option>
+                <option>Jerusalem</option>
+                <option>Tiberias</option>
+            </select><br />
 
-<h2>Predict</h2>
-<form action="predict" method="get">
-    <label>Season: </label>
-    <select name="season">
-        <option>Summer</option>
-        <option>Winter</option>
-        <option>Spring</option>
-        <option>Fall</option>
-    </select><br />
-    <label>Day: </label>
-    <select name="Day">
-        <option>Sunday</option>
-        <option>Monday</option>
-        <option>Tuesday</option>
-        <option>Wednesday</option>
-        <option>Thursday</option>
-        <option>Friday</option>
-        <option>Saturday</option>
-    </select><br />
-    <label>Humidity: </label>
-    <input type="number" name="humidity" /><br />
-    <label>Temperature: </label>
-    <input type="number" name="temperature" /><br />
-    <label>City: </label>
-    <select name="city">
-        <option>Elad</option>
-        <option>Bnei Brak</option>
-        <option>Tel Aviv</option>
-        <option>Ramat Gan</option>
-        <option>Jerusalem</option>
-        <option>Tiberias</option>
-    </select><br />
-    <input type="submit" value="search" />
-</form>
-@if (Model != " ")
-{
-    <p>@data</p>
 
-}
+            <input style="background-color: palevioletred" class="button" type="submit" value="search">
+        </form>
+        @if (Model != " ")
+        {
+            <p>@data</p>
+
+        }
+    </div>
+</div>
+

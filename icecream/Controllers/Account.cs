@@ -22,7 +22,6 @@ namespace icecream.Controllers
             
             return View();
         }
-        [HttpPost]
         public ActionResult Login(string userName, string password)
         {
             if (SellersExists(userName, password))
@@ -37,7 +36,7 @@ namespace icecream.Controllers
         public ActionResult Logout()
         {
                 RouteConfig.user = null;
-                return View("Home");
+                return View("~/Views/Home/Index.cshtml");
         }
         private bool SellersExists(string userName, string password)
         {

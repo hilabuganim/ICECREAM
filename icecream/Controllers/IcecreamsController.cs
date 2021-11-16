@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http;
 using Firebase.Storage;
 using RestSharp;
 using Newtonsoft.Json;
+using System.Web;
 using static icecream.Models.ImaggaHelper;
 
 namespace icecream.Controllers
@@ -64,30 +65,40 @@ namespace icecream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,icecreamName,icecreamDescription,price,image")] Icecream icecream)
+        public async Task<IActionResult> Create([Bind("id,icecreamName,icecreamDescription,price,image")] Icecream icecream )
         {
             if (ModelState.IsValid)
             {
-                if (!checkImage(icecream.image))
+                try
                 {
+                    icecream.sellerId = RouteConfig.user.id;
+                    if (!checkImage(icecream.image))
+                    {
+                        ViewBag.ERROR = "This image is not a picture of icecream, please choose a different picture";
+                        return View(icecream);
+                    }
+                    var stream = System.IO.File.Open(icecream.image, FileMode.Open);
+
+                    // Construct FirebaseStorage with path to where you want to upload the file and put it there
+                    var task = new FirebaseStorage("icecream-ea970.appspot.com")
+                     .Child(icecream.icecreamName + ".jpg")
+                     .PutAsync(stream);
+                    // Await the task to wait until upload is completed and get the download url
+                    var downloadUrl = await task;
+                    icecream.image = downloadUrl;
+                    _context.Add(icecream);
+                    await _context.SaveChangesAsync();
+                    stream.Close();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(Exception e)
+                {
+                    ViewBag.ERROR = "Something is wrong with this picture, please try a different one";
                     return View(icecream);
                 }
-                var stream = System.IO.File.Open(icecream.image, FileMode.Open);
-
-                // Construct FirebaseStorage with path to where you want to upload the file and put it there
-                var task = new FirebaseStorage("icecream-ea970.appspot.com")
-                 .Child(icecream.icecreamName + ".jpg")
-                 .PutAsync(stream);
 
 
-
-                // Await the task to wait until upload is completed and get the download url
-                var downloadUrl = await task;
-                icecream.image = downloadUrl;
-                _context.Add(icecream);
-                await _context.SaveChangesAsync();
-                stream.Close();
-                return RedirectToAction(nameof(Index));
+                
             }
 
 
@@ -143,6 +154,7 @@ namespace icecream.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,icecreamName,icecreamDescription,price,image")] Icecream icecream)
         {
+            icecream.sellerId = RouteConfig.user.id;
             if (id != icecream.id)
             {
                 return NotFound();

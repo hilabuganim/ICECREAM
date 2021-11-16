@@ -60,9 +60,11 @@ namespace icecream.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public IActionResult Create(int icecreamId)
         {
-            return View(new Order());
+            Order order = new Order();
+            order.icecreamId = icecreamId;
+            return View(order);
         }
 
         // POST: Orders/Create
@@ -70,17 +72,23 @@ namespace icecream.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,date,city,street,houseNumber,temp,clientFullName,phoneNumber,humidity,airPollution,status")] Order order)
+        public async Task<IActionResult> Create([Bind("city,street,houseNumber,clientFullName,phoneNumber,icecreamId")] Order order)
         {
             if (ModelState.IsValid)
             {
+                order.date = DateTime.Now;
                 if (!_context.Addresses.Any(a => a.city.ToLower() == order.city.ToLower() && a.street.ToLower() == order.street.ToLower()))
                     return View(order);
                 // insert the weather of this day - API
-
-                _context.Add(order);
+                WeatherHelper weatherHelper = new WeatherHelper();
+                var weather=weatherHelper.CheckWeather(order.city);
+                order.humidity = weather.humidity;
+                order.airPollution = weather.pressure;
+                order.temp = weather.temp;
+                _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["SUCCESS"] = "Enjoy your icecream!";
+                return RedirectToAction("Index", "Icecreams");
             }
             return View(order);
         }
